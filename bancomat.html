@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>classes</title>
+</head>
+<body>
+</body>
+<script>
+    // ბანკომატში არსებული ბარათები თავისი მონაცემებით.
+	cards = {
+		"1609306422942322": {pin:"1234", usd: 1500, gel:3400 },
+		"0100057456017241": {pin:"3956", usd: 360, gel:670 },
+		"1230869653520092": {pin:"3945", usd: 2600, gel:3100 },
+		"0387445820974131": {pin:"7295", usd: 800, gel:1600 },
+		"5701031437640106": {pin:"2957", usd: 3000, gel:2800 }
+		};
+
+    
+	class ATM {
+        // ვამოწმებთ არსებობს თუ არა ბარათი,რომლის ნომერიც მომხმარებელმა შეიყვანა.
+		cardExists(cardNumber){
+			if (Object.keys(cards).includes(cardNumber)) return this.pinCode(prompt("Enter pin code"));
+			else alert ("Such card doesn't exist");
+		}
+        //მომხმარებელს ვთხოვთ პინ კოდის შეყვანას.
+		pinCode(UserPin){
+			if (UserPin===cards[cardnumber]["pin"]) return this.askCurrency(prompt("Enter currency"));
+			else alert ("Error");
+		}
+        // მომხმარებელს ვეკითხებით რომელ ვალუტაში სურს თანხის გატანა.
+		askCurrency(Currency){
+			if (Currency==="usd" ) return this.askAmountUSD(prompt("How much money do you want to take?"));
+			if (Currency==="gel" ) return this.askAmountGel(prompt("How much money do you want to take?"));
+			else alert ("Such currency doesn't exist");
+		}
+        // მომხმარებელს ვეკითხებით თანხის სასურველ რაოდენობას (დოლარში).
+		askAmountUSD(moneyamount){
+			if (moneyamount<=cards[cardnumber]["usd"]) alert(`Please take your ${moneyamount}usd. There is ${cards[cardnumber]["usd"]-moneyamount}usd left on the account.`);
+			if (moneyamount>cards[cardnumber]["usd"]) alert("Error");
+			
+		}
+        // მომხმარებელს ვეკითხებით თანხის სასურველ რაოდენობას (ლარში).
+		askAmountGel(moneyamount){
+			if (moneyamount<=cards[cardnumber]["gel"]) alert(`Please take your ${moneyamount}gel. There is ${cards[cardnumber]["gel"]-moneyamount}gel left on the account.`);
+			if (moneyamount>cards[cardnumber]["gel"]) alert("Error");
+			
+		}
+	}
+const cardnumber = prompt("Enter card number")
+const atm = new ATM;
+atm.cardExists(cardnumber);
+
+
